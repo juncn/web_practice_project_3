@@ -1,8 +1,14 @@
 import { FunctionComponent } from 'react';
+import { Navbar, Search, Info, User } from '../components'
 
 const Dashboard: FunctionComponent = () => {
   return (
-    <div>Dashboard Page</div>
+    <main>
+      <Navbar />
+      <Search />
+      <Info />
+      <User />
+    </main>
   );
 }
 
