@@ -1,11 +1,28 @@
-import React, { createContext, FunctionComponent } from 'react';
+import { createContext, FunctionComponent, useState } from 'react';
+import { mockUser, mockRepos, mockFollowers } from './mockData/mockData';
 
 // const rootUrl = 'https://api.github.com';
 
-const GithubContext = createContext('');
+interface ContextProps {
+  githubUser: any;
+  repos: any[];
+  followers: any[];
+}
+
+const GithubContext = createContext<Partial<ContextProps>>({});
 
 const GithubProvider: FunctionComponent = ({ children }) => {
-  return <GithubContext.Provider value={''}>{ children }</GithubContext.Provider>;
+  const [githubUser, setGithubUser] = useState(mockUser);
+  const [followers, setFollowers] = useState(mockFollowers);
+  const [repos, setRepos] = useState(mockRepos);
+
+  return (
+    <GithubContext.Provider 
+      value={{githubUser, repos, followers}}
+    >
+      { children }
+    </GithubContext.Provider>
+  );
 };
 
 export { GithubContext, GithubProvider };

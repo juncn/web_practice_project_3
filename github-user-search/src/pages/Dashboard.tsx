@@ -1,12 +1,12 @@
 import { FunctionComponent } from 'react';
-import { Navbar, Search, Info, User } from '../components'
+import { Navbar, Search, UserInfo, User } from '../components'
 
 const Dashboard: FunctionComponent = () => {
   return (
     <main>
       <Navbar />
       <Search />
-      <Info />
+      <UserInfo />
       <User />
     </main>
   );

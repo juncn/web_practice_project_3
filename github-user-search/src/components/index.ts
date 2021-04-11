@@ -1,13 +1,13 @@
 import Navbar from './Navbar';
 import Search from './Search';
-import Info from './Info';
+import UserInfo from './UserInfo';
 import User from './User';
 import Repos from './Repos';
 
 export {
   Navbar,
   Search,
-  Info,
+  UserInfo,
   User,
   Repos
 };
