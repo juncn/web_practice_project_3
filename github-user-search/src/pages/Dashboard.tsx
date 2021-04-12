@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { Navbar, Search, UserInfo, User } from '../components'
+import { Navbar, Search, UserInfo, User, Repos } from '../components'
 
 const Dashboard: FunctionComponent = () => {
   return (
@@ -8,6 +8,7 @@ const Dashboard: FunctionComponent = () => {
       <Search />
       <UserInfo />
       <User />
+      <Repos />
     </main>
   );
 }

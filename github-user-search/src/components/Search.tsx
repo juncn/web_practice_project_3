@@ -1,7 +1,6 @@
-import { FunctionComponent } from 'react';
 import styled from 'styled-components';
 
-const Search: FunctionComponent = () => {
+const Search = () => {
   return (
     <Wrapper>Search Component</Wrapper>
   );

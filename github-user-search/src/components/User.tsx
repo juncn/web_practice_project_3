@@ -1,9 +1,15 @@
-import { FunctionComponent } from 'react';
 import styled from 'styled-components';
+import Card from './Card';
+import Followers from './Followers';
 
-const User: FunctionComponent = () => {
+const User = () => {
   return (
-    <Wrapper>User component</Wrapper>
+    <section className="section">
+      <Wrapper className="section-center">
+        <Card></Card>
+        <Followers></Followers>
+      </Wrapper>
+    </section>
   );
 };
 

@@ -1,7 +1,6 @@
-import { FunctionComponent } from 'react';
 import styled from 'styled-components';
 
-const Navbar: FunctionComponent = () => {
+const Navbar = () => {
   return (
     <Wrapper>Navbar Component</Wrapper>
   );
