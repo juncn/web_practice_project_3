@@ -13,7 +13,7 @@ interface Language {
   [key: string]: number;
 }
 
-const transformData = (languages: Language): ChartData[] => {
+const transformLanguageData = (languages: Language): ChartData[] => {
   let chartData: ChartData[] = [];
 
   for (const language in languages) {
@@ -46,13 +46,13 @@ const Repos = () => {
     return total;
   }, {});
 
-  const chartData = transformData(languages);
+  const pid3DChartData = transformLanguageData(languages);
 
   return (
     <section className="section">
       <Wrapper className="section-center">
         {/* <ExampleChart data={chartData} /> */}
-        <Pie3D data={chartData} />
+        <Pie3D data={pid3DChartData} />
       </Wrapper>
     </section>
   );
