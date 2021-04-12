@@ -2,29 +2,57 @@ import { useContext } from 'react';
 import styled from 'styled-components';
 import { GithubContext } from '../context/context';
 // import { ExampleChart, Pie3D, Column3D, Bar3D, Doughnut2D } from './Charts';
-import { ExampleChart } from './Charts';
+import { Pie3D } from './Charts';
+
+interface ChartData {
+  label: string;
+  value: string;
+}
+
+interface Language {
+  [key: string]: number;
+}
+
+const transformData = (languages: Language): ChartData[] => {
+  let chartData: ChartData[] = [];
+
+  for (const language in languages) {
+    chartData.push({ 
+      label: language, 
+      value: languages[language].toString()
+    });
+  }
+
+  // Sort and display top 5 languages
+  chartData = chartData.sort((a, b) => parseInt(b.value) - parseInt(a.value)).slice(0, 5);
+
+  return chartData;
+}
 
 const Repos = () => {
   const { repos } = useContext(GithubContext);
-  const chartData = [
-    {
-      label: 'HTML',
-      value: '13'
-    },
-    {
-      label: 'CSS',
-      value: '23'
-    },
-    {
-      label: 'JavaScript',
-      value: '80'
+  const languages: Language = repos?.reduce((total, item) => {
+    const { language } = item;
+    if (!language) {
+      return total;
     }
-  ];
-  console.log(repos);
+
+    if (!(language in total)) {
+      total[language] = 0;
+    }
+
+    total[language]++;
+
+    return total;
+  }, {});
+
+  const chartData = transformData(languages);
+
   return (
     <section className="section">
       <Wrapper className="section-center">
-        <ExampleChart data={chartData} />
+        {/* <ExampleChart data={chartData} /> */}
+        <Pie3D data={chartData} />
       </Wrapper>
     </section>
   );
