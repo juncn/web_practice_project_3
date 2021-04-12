@@ -2,20 +2,16 @@ import ReactFC from "react-fusioncharts";
 import FusionCharts from "fusioncharts";
 import Chart from "fusioncharts/fusioncharts.charts";
 import FusionTheme from "fusioncharts/themes/fusioncharts.theme.fusion";
+import { ChartData } from '../../types';
 
 // Adding the chart and theme as dependency to the core fusioncharts
 ReactFC.fcRoot(FusionCharts, Chart, FusionTheme);
 
-interface PieChartData {
-  label: string;
-  value: string;
-}
-
 interface Props {
-  data: PieChartData[];
+  data: ChartData[];
 }
 
-const ExampleChart = ({ data }: Props) => {
+const Pie3D = ({ data }: Props) => {
   const chartConfigs = {
     type: "pie3d", // The chart type
     width: "100%", // Width of the chart
@@ -37,4 +33,4 @@ const ExampleChart = ({ data }: Props) => {
   return <ReactFC {...chartConfigs} />;
 }
 
-export default ExampleChart;
+export default Pie3D;
