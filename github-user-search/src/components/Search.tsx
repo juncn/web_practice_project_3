@@ -5,18 +5,24 @@ import { GithubContext } from '../context/context';
 
 const Search = () => {
   const [user, setUser] = useState('');
-  const { remainRequests } = useContext(GithubContext);
+  const { remainRequests, error, searchGithubUser } = useContext(GithubContext);
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
 
-    if (user) {
+    if (user && searchGithubUser) {
+      searchGithubUser(user);
     }
   };
 
   return (
     <section className="section">
       <Wrapper className="section-center">
+        {error && error.show && (
+          <ErrorWrapper>
+            <p>{error.msg}</p>
+          </ErrorWrapper>
+        )}
         <form onSubmit={handleSubmit}>
           <div className="form-control">
             <MdSearch />
@@ -26,9 +32,9 @@ const Search = () => {
               value={user}
               onChange={e => setUser(e.target.value)}
             />
-            {remainRequests && remainRequests > 0 && (
-              <button type="submit">search</button>
-            )}
+            <button type="submit" disabled={!remainRequests}>
+              search
+            </button>
           </div>
         </form>
         <h3>requests: {remainRequests}/60</h3>
@@ -82,6 +88,14 @@ const Wrapper = styled.div`
         background: var(--clr-primary-8);
         color: var(--clr-primary-1);
       }
+      &:disabled {
+        background: var(--clr-grey-3);
+        cursor: not-allowed;
+        &:hover {
+          background: var(--clr-grey-3);
+          color: var(--clr-white);
+        }
+      }
     }
 
     svg {
@@ -104,6 +118,19 @@ const Wrapper = styled.div`
     margin-bottom: 0;
     color: var(--clr-grey-5);
     font-weight: 400;
+  }
+`;
+
+const ErrorWrapper = styled.article`
+  position: absolute;
+  width: 90vw;
+  top: 0;
+  left: 0;
+  transform: translateY(-100%);
+  text-transform: capitalize;
+  p {
+    color: red;
+    letter-spacing: var(--spacing);
   }
 `;
 
