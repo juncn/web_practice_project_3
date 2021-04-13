@@ -14,6 +14,7 @@ interface ContextProps {
     msg: string;
   };
   searchGithubUser: (user: string) => void;
+  isLoading: boolean;
 }
 
 const GithubContext = createContext<Partial<ContextProps>>({});
@@ -27,7 +28,7 @@ const GithubProvider: FunctionComponent = ({ children }) => {
   // Request, Loading
   const [remainRequests, setRemainRequests] = useState(0);
   // eslint-disable-next-line
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   // Error
   const [error, setError] = useState({ show: false, msg: '' });
 
@@ -78,6 +79,7 @@ const GithubProvider: FunctionComponent = ({ children }) => {
         remainRequests,
         error,
         searchGithubUser,
+        isLoading
       }}
     >
       {children}
