@@ -21,15 +21,10 @@ const GithubContext = createContext<Partial<ContextProps>>({});
 
 const GithubProvider: FunctionComponent = ({ children }) => {
   const [githubUser, setGithubUser] = useState(mockUser);
-  // eslint-disable-next-line
   const [followers, setFollowers] = useState(mockFollowers);
-  // eslint-disable-next-line
   const [repos, setRepos] = useState(mockRepos);
-  // Request, Loading
   const [remainRequests, setRemainRequests] = useState(0);
-  // eslint-disable-next-line
   const [isLoading, setIsLoading] = useState(false);
-  // Error
   const [error, setError] = useState({ show: false, msg: '' });
 
   const searchGithubUser = async (user: string) => {
@@ -41,6 +36,21 @@ const GithubProvider: FunctionComponent = ({ children }) => {
 
     if (response) {
       setGithubUser(response.data);
+      const { login, followers_url } = response.data;
+    
+      await Promise.allSettled([
+        axios(`${rootUrl}/users/${login}/repos?per_page=100`),
+        axios(`${followers_url}?per_page=100`)
+      ]).then((results) => {
+        const [repos, followers] = results;
+        const fulfilled = 'fulfilled';
+        if (repos.status === fulfilled) {
+          setRepos(repos.value.data);
+        }
+        if (followers.status === fulfilled) {
+          setFollowers(followers.value.data);
+        }
+      });
     } else {
       toggleError(true, 'there is no user with that username');
     }
