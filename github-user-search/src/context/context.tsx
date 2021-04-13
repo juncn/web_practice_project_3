@@ -34,17 +34,19 @@ const GithubProvider: FunctionComponent = ({ children }) => {
 
   const searchGithubUser = async (user: string) => {
     toggleError();
-    // set loading
+    setIsLoading(true);
     const response = await axios(`${rootUrl}/users/${user}`).catch(err =>
       console.log(err)
     );
+
     if (response) {
-      console.log(response);
       setGithubUser(response.data);
     } else {
       toggleError(true, 'there is no user with that username');
     }
+
     checkRemainRequests();
+    setIsLoading(false);
   };
 
   // Check rate
@@ -79,7 +81,7 @@ const GithubProvider: FunctionComponent = ({ children }) => {
         remainRequests,
         error,
         searchGithubUser,
-        isLoading
+        isLoading,
       }}
     >
       {children}
