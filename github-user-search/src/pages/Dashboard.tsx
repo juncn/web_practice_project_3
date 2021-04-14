@@ -1,9 +1,9 @@
-import { FunctionComponent, useContext } from 'react';
+import { useContext } from 'react';
 import { Navbar, Search, UserInfo, User, Repos } from '../components'
 import { GithubContext } from '../context/context';
 import loadingImg from '../images/preloader.gif';
 
-const Dashboard: FunctionComponent = () => {
+const Dashboard = () => {
   const { isLoading } = useContext(GithubContext);
 
   return (

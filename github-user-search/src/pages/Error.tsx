@@ -1,8 +1,7 @@
-import { FunctionComponent } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-const Error: FunctionComponent = () => {
+const Error = () => {
   return (
     <Wrapper>
       <div>
@@ -12,7 +11,7 @@ const Error: FunctionComponent = () => {
       </div>
     </Wrapper>
   );
-}
+};
 
 const Wrapper = styled.section`
   min-height: 100vh;

@@ -1,8 +1,7 @@
-import { FunctionComponent } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Dashboard, Login, Error, PrivateRoute, AuthWrapper } from './pages';
 
-const App: FunctionComponent = () => {
+const App = () => {
   return (
     <AuthWrapper>
       <Router>
